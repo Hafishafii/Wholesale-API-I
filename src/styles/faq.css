@@ -1,0 +1,92 @@
+/* src/styles/faq.css */
+
+.faq-container {
+  padding: 1.5rem;
+}
+
+.faq-breadcrumb {
+  font-size: 0.875rem;
+  color: #4b5563;
+  margin-bottom: 1rem;
+}
+
+.faq-card {
+  position: relative;
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+}
+
+.faq-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: #9ca3af;
+  transition: color 0.2s;
+}
+
+.faq-close:hover {
+  color: #4b5563;
+}
+
+.faq-title {
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.faq-subtitle {
+  text-align: center;
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-bottom: 2rem;
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.faq-item {
+  width: 100%;
+}
+
+.faq-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #1E2A39;
+  color: white;
+  border-radius: 9999px;
+  padding: 0.75rem 1.5rem;
+  transition: background 0.2s;
+  width: 100%;
+}
+
+.faq-toggle:hover {
+  background: #26364a;
+}
+
+.faq-question {
+  font-size: 0.875rem;
+}
+
+.chevron {
+  transition: transform 0.2s;
+}
+
+.rotate {
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  margin-top: 0.5rem;
+  background: #f3f4f6;
+  border-left: 4px solid #1e3a8a;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  color: #374151;
+}

@@ -1,0 +1,84 @@
+/* Flex wrapper to center the form */
+.forgot-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f3f4f6;
+  padding: 1rem;
+}
+
+/* Main card */
+.forgot-card {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 0.75rem;
+  max-width: 32rem;
+  width: 100%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Form title */
+.forgot-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+/* Form structure */
+.forgot-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Input */
+.forgot-input {
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+}
+
+/* Button */
+.forgot-btn {
+  background-color: #1e3a8a;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  border: none;
+  cursor: pointer;
+}
+
+.forgot-btn:hover {
+  background-color: #1e40af;
+}
+
+/* OTP box */
+.otp-box {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: #f3f4f6;
+  border-radius: 0.5rem;
+}
+
+.otp-label {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.otp-input {
+  width: 100%;
+  padding: 0.5rem;
+  text-align: center;
+  font-size: 1.25rem;
+  letter-spacing: 0.3rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+}
+
+.otp-hint {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: #6b7280;
+}
