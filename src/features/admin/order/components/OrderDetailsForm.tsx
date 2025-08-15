@@ -1,34 +1,36 @@
 import { useState } from "react";
-import type { OrderDetails } from "../types";
+import type { OrderDetails, OrderStatus } from "../types";
 import { Input } from "../../../../components/ui/input";
 import { useNavigate } from "react-router-dom";
 import api from "../../../../lib/api"; // axios instance
 import { Button } from "../../../../components/ui/button";
+
+// Backend's status choices
+const backendStatusOptions: { value: OrderStatus; label: string }[] = [
+  { value: "pending", label: "Pending" },
+  { value: "Accepted", label: "Accepted" },
+  { value: "shipped", label: "Shipped" },
+  { value: "delivered", label: "Delivered" },
+  { value: "cancelled", label: "Cancelled" },
+];
 
 type Props = {
   order: OrderDetails;
 };
 
 const OrderDetailsForm = ({ order }: Props) => {
-  const [selectedStatus, setSelectedStatus] = useState(order.status);
+  const [selectedStatus, setSelectedStatus] = useState<OrderStatus>(
+    (order.status as OrderStatus) || "pending"
+  );
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const isStatusFinal =
-    order.status === "Accepted" || order.status === "Rejected";
-
   const handleUpdateStatus = async () => {
-    if (isStatusFinal) return;
     setLoading(true);
 
     try {
-      const endpoint =
-        selectedStatus === "Rejected"
-          ? `/orders/order/${order._id}/cancel/`
-          : `/orders/order/${order._id}/update_status/`;
-
       await api.patch(
-        endpoint,
+        `/orders/order/${order._id}/update_status/`,
         { status: selectedStatus },
         {
           headers: {
@@ -175,11 +177,7 @@ const OrderDetailsForm = ({ order }: Props) => {
       {hasBranding && (
         <div className="bg-white shadow-sm border border-gray-200 rounded-lg p-6">
           <label className="flex items-center gap-3">
-            <input
-              type="checkbox"
-              checked={order.branding || false}
-              disabled
-            />
+            <input type="checkbox" checked={order.branding || false} disabled />
             <span className="text-sm">Custom branding included</span>
           </label>
         </div>
@@ -263,31 +261,25 @@ const OrderDetailsForm = ({ order }: Props) => {
       <div className="bg-white shadow-sm border border-gray-200 rounded-lg p-6">
         <select
           value={selectedStatus}
-          onChange={(e) =>
-            setSelectedStatus(e.target.value as OrderDetails["status"])
-          }
-          disabled={isStatusFinal || loading}
+          onChange={(e) => setSelectedStatus(e.target.value as OrderStatus)}
+          disabled={loading}
           className="border rounded px-3 py-2 mr-4"
         >
-          <option value="Pending">Pending Review</option>
-          <option value="Accepted">Order Accepted</option>
-          <option value="Rejected">Order Rejected</option>
+          {backendStatusOptions.map((opt) => (
+            <option key={opt.value} value={opt.value}>
+              {opt.label}
+            </option>
+          ))}
         </select>
 
         <Button
           onClick={handleUpdateStatus}
-          disabled={isStatusFinal || loading}
-          className={`px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 disabled:bg-gray-300`}
+          disabled={loading}
+          className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 disabled:bg-gray-300"
         >
-          {loading
-            ? "Updating..."
-            : isStatusFinal
-            ? "Status Finalized"
-            : "Update Status"}
+          {loading ? "Updating..." : "Update Status"}
         </Button>
-
       </div>
-
     </div>
   );
 };
